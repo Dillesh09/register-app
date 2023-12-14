@@ -12,4 +12,16 @@ pipeline {
     }
     stage ('Checkout from SCM'){
       steps{
-        
+        git branch: 'main', credentialsId: 'GitHubSecret', url: 'https://github.com/Dillesh09/register-app.git'
+      }
+    }
+    stage ('Build application'){
+      steps {
+        sh "mvn clean package"
+      }
+    }
+    stage ('Test the application'){
+      steps {
+        sh "mvn test"
+      }
+    }
